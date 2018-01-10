@@ -1,3 +1,4 @@
+import os
 import discord
 import logging
 from dateutil.parser import parse
@@ -231,4 +232,4 @@ async def on_ready():
     print(client.user.id)
     print('------')
 
-client.run('- client token goes here -')
+client.run(os.environ['DISCORD_SECRET'])
