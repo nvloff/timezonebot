@@ -5,10 +5,8 @@ import os
 import json
 
 class JSONAdapter(Adapter):
-    """A Dummy storage adapter that does stores the data in
-    in-memory dict and doesn't persist to disk.
-
-    Used for testing
+    """
+    Adapter used for storing JSON
     """
     DB_PATH = "tzdata.json"
 

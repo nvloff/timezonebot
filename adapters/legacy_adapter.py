@@ -5,10 +5,8 @@ import os
 import pickle
 
 class LegacyAdapter(Adapter):
-    """A Dummy storage adapter that does stores the data in
-    in-memory dict and doesn't persist to disk.
-
-    Used for testing
+    """
+    Same data structure as originally designed
     """
     DB_PATH = "tzdata.p"
 
