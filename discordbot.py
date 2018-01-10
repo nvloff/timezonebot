@@ -4,7 +4,6 @@ from dateutil.parser import parse
 from dateutil.tz import gettz
 from pytz import timezone
 from time import gmtime, strftime
-import pickle
 
 logging.basicConfig(level=logging.CRITICAL)
 client = discord.Client()
@@ -19,7 +18,10 @@ EST_tz = gettz("America/New York")
 
 timezone_var = {}
 
-timezone_var = pickle.load( open( "tzdata.p", "rb" ) )
+from repository import Repository
+from adapters.legacy_adapter import LegacyAdapter
+timezone_var = Repository(LegacyAdapter())
+#timezone_var = pickle.load( open( "tzdata.p", "rb" ) )
 
 
 @client.event
@@ -28,7 +30,8 @@ async def on_message(message):
 	if message.author == client.user:
 		return
 	# standard list of timezones for given time.
-	timezone_var = pickle.load( open( "tzdata.p", "rb" ) )
+	#timezone_var = pickle.load( open( "tzdata.p", "rb" ) )
+	timezone_var = Repository(LegacyAdapter())
 
 	if message.content.startswith('!tzlist'):
 		try:
@@ -50,7 +53,7 @@ async def on_message(message):
 		else:
 			timezone_var[message.author.id] = msg_list[1]
 			# Save file
-			pickle.dump( timezone_var, open( "tzdata.p", "wb" ) )
+			timezone_var.store()
 			# Respond to user
 			resp = "Request successful <@" + str(message.author.id) + ">"
 			await client.send_message(message.channel, resp)
