@@ -2,3 +2,10 @@ discord.py==0.16.12
 aiohttp
 websockets
 chardet
+pytz
+logging
+time
+datetime
+random
+pyparsing
+pytz
